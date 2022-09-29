@@ -9,8 +9,7 @@
     Use querySelector to select that button and save it to a variable called sayHelloButton
 */
 
-// CODE HERE
-
+const sayHelloButton = document.querySelector("#say-hello-button");
 
 // PROBLEM 2
 /*
@@ -19,8 +18,10 @@
     Attach a mouseover event to sayHelloButton that calls the function you wrote
 */
 
-// CODE HERE
-
+sayHelloButton.addEventListener("mouseover", (event) => {
+    sayHelloButton.style.backgroundColor = "black";
+    sayHelloButton.style.color = "white";
+})
 
 // PROBLEM 3
 /*
@@ -31,8 +32,10 @@
     Attach another listener that fires your second function when the mouseout event occurs on the button
 */
 
-// CODE HERE
-
+sayHelloButton.addEventListener("mouseout", (event) => {
+    sayHelloButton.style.backgroundColor = document.querySelector("#animals-button").style.backgroundColor;
+    sayHelloButton.style.color = "black";
+})
 
 // PROBLEM 4
 /*
@@ -52,8 +55,7 @@ const sayHello = () => {
 }
 // DO NOT EDIT FUNCTION
 
-// CODE HERE
-
+sayHelloButton.addEventListener("click", sayHello);
 
 // PROBLEM 5 
 /*
@@ -67,10 +69,13 @@ const sayHello = () => {
 */ 
 
 const ohMy = () => {
-    // YOUR CODE HERE
+    axios.get("http://localhost:3000/animals")
+        .then((res) => {
+            console.log(res.data);
+        })
 }
 
-document.getElementById('animals-button').addEventListener('click', ohMy)
+document.getElementById('animals-button').addEventListener('click', ohMy);
 
 
 // PROBLEM 6 
@@ -86,9 +91,16 @@ document.getElementById('animals-button').addEventListener('click', ohMy)
     We'll be updating this function in the next problem.
 */
 
-const repeatMyParam = () => {
-    //YOUR CODE HERE
+const repeatMyParam = (param) => {
+    axios.get("http://localhost:3000/repeat/" + param)
+        .then((res) => {
+            console.log(res.data);
+            document.getElementById("repeat-text").textContent = res.data;
+            document.querySelector("#repeat-text").style.display = "block";
+        })
 }
+
+document.getElementById("repeat-button").addEventListener("click", repeatMyParam)
 
 // PROBLEM 7
 /*
@@ -99,8 +111,7 @@ const repeatMyParam = () => {
     After setting the textContent, use the style method to change display to 'block'
 */
 
-// Code in the repeatMyParam function above
-
+// Done
 
 
 // PROBLEM 8
@@ -112,8 +123,14 @@ const repeatMyParam = () => {
     Outside of your new function, select the button with the id "query-button" and add a click event listener that calls your function.
 */
 
-// CODE HERE
+const queryReq = () => {
+    axios.get("http://localhost:3000/query-test/")
+        .then((res) => {
+            console.log(res.data);
+        })
+}
 
+document.getElementById("query-button").addEventListener("click", queryReq)
 
 
 ////////////////
